@@ -1,0 +1,81 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     chtMultiRegionFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         2;
+
+deltaT          2.5e-4;
+
+writeControl    adjustableRunTime;
+
+writeInterval   100;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+maxCo           1.0;
+
+maxDi           10.0;
+
+//adjustTimeStep  yes;
+
+functions
+{
+	#includeFunc residuals
+	#includeFunc cellMaxFinT
+	#includeFunc cellMaxCell1T
+	averageTempCell1FinInterface
+    {
+        type            surfaceFieldValue;
+        surfaceFormat   off;
+        libs            ("libfieldFunctionObjects.so");
+        enabled         true;
+        writeControl    timeStep;
+        writeInterval   1;
+        log             true;
+        writeFields     false;
+        region          cell1;
+        regionType      patch;
+        name            cell1_to_fins;
+        operation       areaAverage;
+        mode            magnitude;
+        fields
+        (
+            T
+        );
+    }
+
+}
+
+// ************************************************************************* //

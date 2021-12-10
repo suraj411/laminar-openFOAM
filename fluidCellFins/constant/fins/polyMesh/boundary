@@ -1,0 +1,77 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      binary;
+    class       polyBoundaryMesh;
+    location    "constant/fins/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+6
+(
+    base_fins
+    {
+        type            patch;
+        nFaces          630;
+        startFace       37513;
+    }
+    fins_to_cell3
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          301;
+        startFace       38143;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cell3;
+        samplePatch     cell3_to_fins;
+    }
+    fins_to_cell4
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          295;
+        startFace       38444;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cell4;
+        samplePatch     cell4_to_fins;
+    }
+    fins_to_cell2
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          305;
+        startFace       38739;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cell2;
+        samplePatch     cell2_to_fins;
+    }
+    fins_to_fluid
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          4180;
+        startFace       39044;
+        sampleMode      nearestPatchFace;
+        sampleRegion    fluid;
+        samplePatch     fluid_to_fins;
+    }
+    fins_to_cell1
+    {
+        type            mappedWall;
+        inGroups        List<word> 1(wall);
+        nFaces          307;
+        startFace       43224;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cell1;
+        samplePatch     cell1_to_fins;
+    }
+)
+
+// ************************************************************************* //
