@@ -8,3 +8,4 @@ We have constant velocity on left side of entrance region.
 We have zeroGradient on top of the flat plate region & the right hand side.
 We have noSlip condition on the bottom of flat plate region.
 
+for the future we want to include turbulence modelling... let's see how we can do it (maybe we can do it in another repository)
